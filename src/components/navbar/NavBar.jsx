@@ -26,25 +26,23 @@ export default memo(function NavBar() {
   }, [])
   const location = useLocation();
   const navigate = useNavigate();
-  function handleNavigate() {
-    navigate('/active')
-  }
 
   return <>
     <div className='navbar' style={{ width: '100%', height: 'calc(100% - 70px)' }}>
       <Frame>
-        <div style={{ display: 'flex', width: '100%', height: '100%' }}>
+        <div style={{ display: 'flex', width: '100%', height: '100vh' }}>
           <Navigation location={location.pathname}>
             <Navigation.Section
               items={[
                 {
-                  excludePaths: ['#'],
+                  url:'',
+                  excludePaths: [],
                   label: 'Home',
                   icon: HomeMinor,
                   onClick: () => navigate('/'),
                 },
                 {
-                  excludePaths: ['#'],
+                  excludePaths: ["/"],
                   label: 'Tasks Catalog',
                   icon: AppsMinor,
                   badge: <span className="Polaris-Badge Polaris-Badge--statusInfo"><Text fontWeight="semibold" variant="bodySm" as="span">{tasks.length}</Text></span>,
