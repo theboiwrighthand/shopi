@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './navbar.css'
 import {
   HomeMinor, AppsMinor, GiftCardMajor,
   CirclePlusOutlineMinor,
@@ -28,9 +29,9 @@ export default memo(function NavBar() {
   const navigate = useNavigate();
 
   return <>
-    <div className='navbar' style={{ width: '100%', height: 'calc(100% - 70px)' }}>
+    <div className='navbar'>
       <Frame>
-        <div style={{ display: 'flex', width: '100%', height: '100vh' }}>
+        <div className='navbar-items'>
           <Navigation location={location.pathname}>
             <Navigation.Section
               items={[
@@ -121,7 +122,7 @@ export default memo(function NavBar() {
               ]}
             />
           </Navigation>
-          <div style={{ margin: '0 auto', width: 'calc(100% - 300px)', height: '100vh', padding: ' 0 100px' }}>
+          <div className='outlet'>
             <Outlet />
           </div>
         </div>
