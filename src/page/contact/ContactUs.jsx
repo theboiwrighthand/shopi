@@ -26,20 +26,17 @@ export default memo(function ContactUs() {
             subject: Yup.string().required("Subject không được để trống"),
             message: Yup.string().required("Message không được để trống"),
         }),
-        onSubmit: async (value) => {
+        onSubmit: async (value, { resetForm }) => {
             setLoading(!false);
             try {
                 const response = await axios.post("https://testapi.io/api/anhez/contact-us", value);
                 setContent(response.data.msg);
-                console.log(response.data.msg);
+                // console.log(response.data.msg);
+                window.alert("Cảm ơn bạn đã liên hệ!");
+                resetForm();
             } catch (error) {
-                if (error instanceof Yup.ValidationError) {
-                    const validationErrors = {};
-                    error.inner.forEach((err) => {
-                        validationErrors[err.path] = err.message;
-                    });
-                    console.log(error);
-                }
+                window.alert(error)
+                console.log(error);
             }
             setLoading(false);
         }
@@ -69,9 +66,9 @@ export default memo(function ContactUs() {
                     onBlur={formik.handleBlur}
                 />
                 {formik.touched.email && formik.errors.email ? (
-                     <Text variant="headingXs" as="h6" color="critical">
-                     {`*${formik.errors.email}`}
-                 </Text>
+                    <Text variant="headingXs" as="h6" color="critical">
+                        {`*${formik.errors.email}`}
+                    </Text>
                 ) : null}
                 <br />
 
@@ -85,9 +82,9 @@ export default memo(function ContactUs() {
                     onBlur={formik.handleBlur}
                 />
                 {formik.touched.subject && formik.errors.subject ? (
-                     <Text variant="headingXs" as="h6" color="critical">
-                     {`*${formik.errors.subject}`}
-                 </Text>
+                    <Text variant="headingXs" as="h6" color="critical">
+                        {`*${formik.errors.subject}`}
+                    </Text>
                 ) : null}
                 <br />
 
