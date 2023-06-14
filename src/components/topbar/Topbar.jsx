@@ -1,5 +1,5 @@
 import {TopBar, ActionList, Icon, Frame, Text} from '@shopify/polaris';
-import {ArrowLeftMinor, QuestionMarkMajor} from '@shopify/polaris-icons';
+import {ThumbsUpMajor, QuestionMarkMajor} from '@shopify/polaris-icons';
 import {useState, useCallback, memo} from 'react';
 
 export default memo( function Topbar() {
@@ -44,7 +44,7 @@ export default memo( function Topbar() {
     <TopBar.UserMenu
       actions={[
         {
-          items: [{content: 'Back to Shopify', icon: ArrowLeftMinor}],
+          items: [{content: 'Back to Shopify', icon: QuestionMarkMajor}],
         },
         {
           items: [{content: 'Community forums'}],
@@ -77,11 +77,12 @@ export default memo( function Topbar() {
     <TopBar.Menu
       activatorContent={
         <span>
-          <Icon source={QuestionMarkMajor} />
+          <Icon source={ThumbsUpMajor} />
           <Text as="span" visuallyHidden>
             Secondary menu
           </Text>
         </span>
+
       }
       open={isSecondaryMenuOpen}
       onOpen={toggleIsSecondaryMenuOpen}
