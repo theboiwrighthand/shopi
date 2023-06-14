@@ -70,7 +70,7 @@ export default memo(function TaskList({ data }) {
                 {rowMarkup}
             </IndexTable>
         ) : (
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'center'}}>
                 <Spinner size="large" color="inkLightest" />
             </div>
         )

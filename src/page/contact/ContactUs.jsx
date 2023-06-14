@@ -44,7 +44,7 @@ export default memo(function ContactUs() {
     })
 
     return (
-        <div style={{ width: "80%", margin: "0 auto" }}>
+        <div className='form-contact' style={{ width: "80%", margin: "0 auto" }}>
             <LegacyStack vertical>
                 <Text variant="heading2xl" as="h3">
                     Contact
@@ -55,8 +55,8 @@ export default memo(function ContactUs() {
                 {content}
             </Text>
             <br />
-            <form onSubmit={formik.handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
-                <label htmlFor="email">Email:</label>
+            <form className='form-group ' onSubmit={formik.handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+                <label htmlFor="email">Your Email:</label>
                 <input
                     id="email"
                     name="email"
@@ -95,6 +95,7 @@ export default memo(function ContactUs() {
                     value={formik.values.message}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
+                    rows="6"
                 />
                 {formik.touched.message && formik.errors.message ? (
                     <Text variant="headingXs" as="h6" color="critical">

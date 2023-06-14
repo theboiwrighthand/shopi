@@ -1,0 +1,15 @@
+.bground {
+    height: 45vh;
+    width: 100%;
+    object-fit: cover;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.task-list {
+    height: 30vh;
+    background-color: #fff;
+    overflow-y: scroll;
+    border-radius: 10px;
+}

@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom'
 import Product from './page/product/Product';
 import './App.css'
 import Home from './page/home/Home';
-import NotPage from './page/not/NotPage';
 import AppLayout from './components/layout/AppLayout';
 import ContactUs from './page/contact/ContactUs';
 import ActivePage from './page/not/ActivePage';
@@ -28,7 +27,6 @@ function App() {
           <Route path='/invite' element={<InvitePage />} />
           <Route path='/mem' element={<MemberPage />} />
           <Route path='/sub' element={<SubcribePage />} />
-
         </Route>
       </Routes>
     </>
