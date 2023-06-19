@@ -26,28 +26,25 @@ export default memo(function ContactUs() {
         }),
         onSubmit: async (values, { resetForm }) => {
             setLoading(true);
-            // try {
-            //     const response = await axios.post("https://testapi.io/api/anhez/contact-us", values);
-            //     setContent(
-            //         <Text variant="headingSm" as="h6" color="success">{response.data.msg}</Text>
-            //         );
-            //     console.log(values);
-            //     window.alert("Cảm ơn bạn đã liên hệ!");
-            //     resetForm();
-            // } catch (error) {
-            //     window.alert(error);
-            //     console.log(error);
-            // }
-            setTimeout(() => {
-                setContent(<Text variant="headingSm" as="h6" color="success">Done!</Text>);
-                setLoading(false);
-            }, 5000)
+            try {
+                const response = await axios.post("https://testapi.io/api/anhez/contact-us", values);
+                setContent(
+                    <Text variant="headingSm" as="h6" color="success">{response.data.msg}</Text>
+                    );
+                console.log(values);
+                window.alert("Cảm ơn bạn đã liên hệ!");
+                setLoading(false)
+                resetForm();
+            } catch (error) {
+                window.alert(error);
+                console.log(error);
+            }
         }
     });
     const handleChange = (value, id) => formik.handleChange({ target: { id, value } });
 
     return (
-        <div style={{ width: "80%", margin: "0 auto" }}>
+        <div style={{ width: "80%" }}>
             <Frame>
                 {loading ? <Loading /> : null}
                 <Text variant="headingLg" as="h5">Contact</Text>

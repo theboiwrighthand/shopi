@@ -1,4 +1,4 @@
-import { IndexTable, Text, Badge, Icon, Spinner } from '@shopify/polaris';
+import { IndexTable, Text, Badge, Icon, Spinner, LegacyCard } from '@shopify/polaris';
 import React, { memo } from 'react';
 import './tasklist.css'
 import moment from 'moment';
@@ -22,7 +22,7 @@ export default memo(function TaskList({ data }) {
 
             <IndexTable.Row id={item.id} key={item.id} position={index} loading={true} >
                 <IndexTable.Cell >
-                    <div style={{display:'flex'}}>
+                    <div style={{display:'flex',marginLeft:'10px'}}>
                     <Icon source={item.type == 'Developer' ? CodeMinor : item.type == 'Producer' ? MagicMinor : item.type == 'Manager' ? ConfettiMajor : item.type == 'Engineer' ? ResourcesMajor : item.type == 'Designer' ? ThemeEditMajor : EmbedMinor}
                         color="subdued" ></Icon>
                     <Badge >
@@ -55,8 +55,10 @@ export default memo(function TaskList({ data }) {
 
     const content = data && data.length > 0
         ? (
+            <LegacyCard >
+
             <IndexTable
-            
+                sectioned
                 itemCount={data.length}
                 headings={[
                     // { title: '' },
@@ -73,6 +75,7 @@ export default memo(function TaskList({ data }) {
             >
                 {rowMarkup}
             </IndexTable>
+            </LegacyCard>
         ) : (
             <div style={{ display: 'flex', justifyContent: 'center'}}>
                 <Spinner size="large" color="inkLightest" />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import TaskList from '../../components/tasklist/TaskList'
 import axios from 'axios';
-import { Text, LegacyCard, Scrollable, Layout, TextContainer, FormLayout, TextField, Button } from '@shopify/polaris';
+import { Text, LegacyCard, Layout, TextContainer, Button } from '@shopify/polaris';
 import "./home.css"
 
 export default function Home() {
@@ -16,13 +16,12 @@ export default function Home() {
 
   return (
     <>
-      <div style={{ backGroundColor: '#F1F2F4' }}>
         <LegacyCard sectioned>
           <LegacyCard.Section>
             <div className='bground'>
               <Layout>
                 <Layout.Section oneThird>
-                  <div style={{ marginTop: '100px', marginLeft: '150px', width: '30%' }}>
+                  <div style={{ marginTop: '10%', marginLeft: '150px', width: '30%',height:'100%' }}>
                     <TextContainer>
                       <Text id="storeDetails" variant="heading2xl" as="h3"  >
                         Hey John, Welcome to CarsonDash!
@@ -30,7 +29,7 @@ export default function Home() {
                       <Text color="subdued" variant="headingLg" as="h5">
                         Submit a new task, pick a task from the catalog or subcribe to submit unlimited tasks
                       </Text>
-                      <div style={{ width: '40%', display: 'flex', flexDirection: 'column' }}>
+                      <div style={{ width: '40%' , height:'100%', display: 'flex', flexDirection: 'column' }}>
                         <Button fullWidth  >Submit new task</Button>
                         <br />
                         <Button primary fullWidth >Subsribe & Save</Button>
@@ -54,7 +53,7 @@ export default function Home() {
             {/* </Scrollable> */}
           </LegacyCard.Section>
         </LegacyCard>
-      </div>
+
     </>
 
   )
