@@ -3,3 +3,19 @@
     width: 100%;
     margin-top: 20px;
 }
+.Polaris-Icon{
+    margin: 0 !important;
+}
+.Polaris-IndexTable__TableCell{
+    padding: 0 !important;
+}
+.Polaris-IndexTable__TableHeading{
+    padding: 0 !important;
+}
+.Polaris-IndexTable__TableHeading{
+    padding: 10px 0px !important;
+}
+
+/* h1, h2, h3, h4, h5, h6, p {
+    margin: 14px !important;
+} */

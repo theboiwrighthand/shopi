@@ -1,13 +1,11 @@
-import { Form, FormLayout, TextField, Button, Text, LegacyStack } from '@shopify/polaris';
+import { Form, FormLayout, TextField, Button, Text, LegacyCard, Spinner, Divider, Loading, Frame } from '@shopify/polaris';
 import axios from 'axios';
 import React, { useState, memo } from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import './contact.css'
-
 
 export default memo(function ContactUs() {
-    const [content, setContent] = useState("Don't hesitate to contact us if you face any problem or have any question about the app. We are happy to help you ^^");
+    const [content, setContent] = useState(<Text variant="headingSm" as="h6" >Don't hesitate to contact us if you face any problem or have any question about the app. We are happy to help you ^^</Text>);
     const [loading, setLoading] = useState(false)
 
     const formik = useFormik({
@@ -26,94 +24,79 @@ export default memo(function ContactUs() {
             subject: Yup.string().required("Subject không được để trống"),
             message: Yup.string().required("Message không được để trống"),
         }),
-        onSubmit: async (value, { resetForm }) => {
-            setLoading(!false);
-            try {
-                const response = await axios.post("https://testapi.io/api/anhez/contact-us", value);
-                setContent(response.data.msg);
-                // console.log(response.data.msg);
-                window.alert("Cảm ơn bạn đã liên hệ!");
-                resetForm();
-            } catch (error) {
-                window.alert(error)
-                console.log(error);
-            }
-            setLoading(false);
+        onSubmit: async (values, { resetForm }) => {
+            setLoading(true);
+            // try {
+            //     const response = await axios.post("https://testapi.io/api/anhez/contact-us", values);
+            //     setContent(
+            //         <Text variant="headingSm" as="h6" color="success">{response.data.msg}</Text>
+            //         );
+            //     console.log(values);
+            //     window.alert("Cảm ơn bạn đã liên hệ!");
+            //     resetForm();
+            // } catch (error) {
+            //     window.alert(error);
+            //     console.log(error);
+            // }
+            setTimeout(() => {
+                setContent(<Text variant="headingSm" as="h6" color="success">Done!</Text>);
+                setLoading(false);
+            }, 5000)
         }
-
-    })
+    });
+    const handleChange = (value, id) => formik.handleChange({ target: { id, value } });
 
     return (
-        <div className='form-contact' style={{ width: "80%", margin: "0 auto" }}>
-            <LegacyStack vertical>
-                <Text variant="heading2xl" as="h3">
-                    Contact
-                </Text>
-            </LegacyStack>
-            <br />
-            <Text variant="headingSm" as="h6" color='success'>
-                {content}
-            </Text>
-            <br />
-            <form className='form-group ' onSubmit={formik.handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
-                <label htmlFor="email">Your Email:</label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
-                {formik.touched.email && formik.errors.email ? (
-                    <Text variant="headingXs" as="h6" color="critical">
-                        {`*${formik.errors.email}`}
-                    </Text>
-                ) : null}
+        <div style={{ width: "80%", margin: "0 auto" }}>
+            <Frame>
+                {loading ? <Loading /> : null}
+                <Text variant="headingLg" as="h5">Contact</Text>
                 <br />
-
-                <label htmlFor="subject">Subject:</label>
-                <input
-                    id="subject"
-                    name="subject"
-                    type="text"
-                    value={formik.values.subject}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                />
-                {formik.touched.subject && formik.errors.subject ? (
-                    <Text variant="headingXs" as="h6" color="critical">
-                        {`*${formik.errors.subject}`}
-                    </Text>
-                ) : null}
-                <br />
-
-                <label htmlFor="message">Message:</label>
-                <textarea
-                    id="message"
-                    name="message"
-                    value={formik.values.message}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    rows="6"
-                />
-                {formik.touched.message && formik.errors.message ? (
-                    <Text variant="headingXs" as="h6" color="critical">
-                        {`*${formik.errors.message}`}
-                    </Text>
-                ) : null}
-                <br />
-
-                {loading ? (
-                    <Button loading primary submit>
-                        Submit
-                    </Button>
-                ) : (
-                    <Button primary submit>
-                        Submit
-                    </Button>
-                )}
-            </form>
+                <Form onSubmit={formik.handleSubmit}>
+                    <FormLayout>
+                        <LegacyCard title={content}>
+                            <LegacyCard.Section>
+                                <TextField
+                                    {...formik.getFieldProps("email")}
+                                    id="email"
+                                    label="Your email"
+                                    type="email"
+                                    autoComplete="email"
+                                    error={formik.touched.email && formik.errors.email}
+                                    onChange={handleChange}
+                                />
+                                <TextField
+                                    {...formik.getFieldProps("subject")}
+                                    id="subject"
+                                    label="Subject"
+                                    type="text"
+                                    autoComplete="off"
+                                    error={formik.touched.subject && formik.errors.subject}
+                                    onChange={handleChange}
+                                />
+                                <TextField
+                                    {...formik.getFieldProps("message")}
+                                    id="message"
+                                    label="Message"
+                                    multiline={4}
+                                    autoComplete="off"
+                                    error={formik.touched.message && formik.errors.message}
+                                    onChange={handleChange}
+                                />
+                            </LegacyCard.Section>
+                            <LegacyCard.Section>
+                                <Button primary submit disabled={loading}>
+                                    {loading ? (
+                                        <Spinner accessibilityLabel="loading" size="small" />
+                                    ) : (
+                                        "Send"
+                                    )}
+                                </Button>
+                            </LegacyCard.Section>
+                        </LegacyCard>
+                    </FormLayout>
+                </Form>
+            </Frame>
         </div>
     );
 }

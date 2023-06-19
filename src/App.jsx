@@ -1,32 +1,37 @@
 import { Routes, Route } from 'react-router-dom'
 import Product from './page/product/Product';
+import { lazy, Suspense } from 'react';
 import './App.css'
-import Home from './page/home/Home';
-import AppLayout from './components/layout/AppLayout';
-import ContactUs from './page/contact/ContactUs';
-import ActivePage from './page/not/ActivePage';
-import ClosePage from './page/not/ClosePage';
-import CompletePage from './page/not/CompletePage';
-import FAQpage from './page/not/FAQpage';
-import InvitePage from './page/not/InvitePage';
-import MemberPage from './page/not/MemberPage';
-import SubcribePage from './page/not/SubcribePage';
+import Skeleton from './components/skeleton/Skeleton';
+
+
+const Home = lazy(() => import('./page/home/Home'))
+const AppLayout = lazy(() => import('./components/layout/AppLayout'))
+const ContactUs = lazy(() => import('./page/contact/ContactUs'))
+const ActivePage = lazy(() => import('./page/not/ActivePage'))
+const ClosePage = lazy(() => import('./page/not/ClosePage'))
+const CompletePage = lazy(() => import('./page/not/CompletePage'))
+const FAQpage = lazy(() => import('./page/not/FAQpage'))
+const InvitePage = lazy(() => import('./page/not/InvitePage'))
+const MemberPage = lazy(() => import('./page/not/MemberPage'))
+const SubcribePage = lazy(() => import('./page/not/SubcribePage'))
 
 function App() {
+
   return (
     <>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route path='/' element={<Home />} />
-          <Route path='/product' element={<Product />} />
-          <Route path='/contact' element={<ContactUs />} />
-          <Route path='/active' element={<ActivePage />} />
-          <Route path='/close' element={<ClosePage />} />
-          <Route path='/complete' element={<CompletePage />} />
-          <Route path='/faq' element={<FAQpage />} />
-          <Route path='/invite' element={<InvitePage />} />
-          <Route path='/mem' element={<MemberPage />} />
-          <Route path='/sub' element={<SubcribePage />} />
+          <Route path='/' element={<Suspense fallback={<Skeleton title='Home Page' />}> <Home /> </Suspense>} />
+          <Route path='/product' element={<Suspense fallback={<Skeleton title='Product Page' />}><Product /></Suspense>} />
+          <Route path='/contact' element={<Suspense fallback={<Skeleton title='Contact Page' />}><ContactUs /></Suspense>} />
+          <Route path='/active' element={<Suspense fallback={<Skeleton title='Active Page' />}><ActivePage /></Suspense>} />
+          <Route path='/close' element={<Suspense fallback={<Skeleton title='Close Page' />}><ClosePage /></Suspense>} />
+          <Route path='/complete' element={<Suspense fallback={<Skeleton title='Complete Page' />}><CompletePage /></Suspense>} />
+          <Route path='/faq' element={<Suspense fallback={<Skeleton title='FAQ Page' />}><FAQpage /></Suspense>} />
+          <Route path='/invite' element={<Suspense fallback={<Skeleton title='Ivite Page' />}><InvitePage /></Suspense>} />
+          <Route path='/mem' element={<Suspense fallback={<Skeleton title='Menber Page' />}><MemberPage /></Suspense>} />
+          <Route path='/sub' element={<Suspense fallback={<Skeleton title='Subcribe Page' />}><SubcribePage /></Suspense>} />
         </Route>
       </Routes>
     </>
